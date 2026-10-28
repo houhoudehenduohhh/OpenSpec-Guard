@@ -24,31 +24,43 @@ The same AI agent that interprets your prompt also writes the code, tests its ow
 
 ## 🏛️ System Architecture
 
-```mermaid
-flowchart TD
-    User([User Prompt / Feature Request]) --> Propose["/opsx-propose<br><b>[Legislative]</b><br>Generates Proposal, Specs, Design, Tasks"]
-    Propose --> HumanReview{Human Review & Approval}
-    
-    HumanReview -- "Approved" --> Apply["/opsx-apply<br><b>[Executive]</b><br>Primary Agent Implements Code & Tests"]
-    HumanReview -- "Revise" --> Update["/opsx-update<br>Update Planning Artifacts"]
-    Update --> Propose
-
-    subgraph AuditGate ["🛡️ Read-Only Tri-Audit Gate (Automatic)"]
-        direction TB
-        Auditor["Zero-Memory Auditor Subagent<br><code>EnableWriteTools: false</code>"]
-        F["1. audit_functional.md<br>(Spec & Contract Compliance)"]
-        R["2. audit_runtime.md<br>(Robustness & Environment Isolation)"]
-        S["3. audit_security.md<br>(Out-of-Scope Red Lines & Safety)"]
-        Auditor --> F
-        Auditor --> R
-        Auditor --> S
-    end
-
-    Apply -->|Tasks 100% Complete| AuditGate
-    
-    AuditGate --> Verdict{Audit Verdict}
-    Verdict -- "Any REJECT" --> Remediate["Remediate Code Flaws"] --> Apply
-    Verdict -- "All PASS" --> Archive["/opsx-archive<br><b>[Archival]</b><br>Merge Specs & Archive Change"]
+```text
+  [ User Feature Request ]
+             │
+             ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ 1. LEGISLATIVE STAGE: /opsx-propose                              │
+│    Generates: proposal.md, spec.md, design.md, tasks.md          │
+│    Rule: ZERO code is written. Awaits explicit human approval.   │
+└────────────────────────────────┬─────────────────────────────────┘
+                                 │
+                     [ Human Review & Approval ]
+                                 │
+                                 ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ 2. EXECUTIVE STAGE: /opsx-apply                                  │
+│    Primary agent implements code & runs verification tests.      │
+└────────────────────────────────┬─────────────────────────────────┘
+                                 │
+                  [ Tasks 100% Complete - Auto Trigger ]
+                                 │
+                                 ▼
+┌──────────────────────────────────────────────────────────────────┐
+│ 3. JUDICIAL GATE: Zero-Memory Read-Only Auditor                  │
+│    (Physically isolated with EnableWriteTools: false)            │
+│                                                                  │
+│    ├──► audit_functional.md (Contract & Feature Conformance)     │
+│    ├──► audit_runtime.md    (Robustness & Environment Isolation) │
+│    └──► audit_security.md   (Out-of-Scope Red Lines & Safety)    │
+└────────────────────────────────┬─────────────────────────────────┘
+                                 │
+                ┌────────────────┴────────────────┐
+                ▼                                 ▼
+      [ Any Dimension REJECT ]          [ All Dimensions PASS ]
+                │                                 │
+                ▼                                 ▼
+       Remediate & Re-audit              4. ARCHIVAL: /opsx-archive
+                                            (Merge & Gated Sync)
 ```
 
 ---
