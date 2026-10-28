@@ -46,6 +46,7 @@ Execute an independent, read-only code audit against OpenSpec specifications.
      - *Verdict: PASS | REJECT*
    - **Dimension 2: Runtime Robustness & Engineering Standards (`audit_runtime.md`)**
      - Does the code adhere to virtual environment isolation (`.\.venv\Scripts\python.exe`)?
+     - Does the code adhere to the Config-Driven principle (zero script bloat; parameters/paths must be externalized in `configs/` or flags, not duplicated script copies)?
      - Are exceptions caught specifically without bare `except:`?
      - Are resource handles (files, database connections, sessions) properly closed?
      - Are file and variable namings 100% in English with zero Chinese logging?

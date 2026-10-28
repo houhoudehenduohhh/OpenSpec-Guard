@@ -5,8 +5,9 @@ context: |
   1. Environment Isolation: Scripts and dependencies must run inside isolated project virtual environments (e.g., .venv for Python or local node_modules).
   2. Directory Hygiene: Keep project root clean. Scripts belong in dedicated code directories; documentation belongs in markdown/docs; raw data and artifacts must be separated.
   3. Language & Logging: Production code, identifier names, and console/system logs must be 100% in English to prevent cross-platform encoding crashes.
-  4. Cleanup Contract: Temporary audit, test, or exploration scripts must be cleaned up immediately upon verification.
-  5. Read-Only Independent Audit Gate: Upon completing task implementation, an isolated, zero-memory auditor with STRICTLY DISABLED write tools must evaluate the codebase across 3 distinct dimensions before archiving is permitted.
+  4. Config-Driven & Anti-Duplication: Forbid creating redundant duplicate scripts for parameter variants. Abstract single generic production scripts and externalize parameters into `configs/`.
+  5. Cleanup Contract: Temporary audit, test, or exploration scripts must be cleaned up immediately upon verification.
+  6. Read-Only Independent Audit Gate: Upon completing task implementation, an isolated, zero-memory auditor with STRICTLY DISABLED write tools must evaluate the codebase across 3 distinct dimensions before archiving is permitted.
 
 rules:
   proposal:
@@ -18,6 +19,7 @@ rules:
   design:
     - Document technical architecture, component interactions, and data contracts.
     - Explicitly detail error handling, resource cleanup, and security boundaries.
+    - Enforce the Config-Driven principle: specify generic script interfaces and corresponding config file structures, prohibiting duplicate script sprawl.
   tasks:
     - Group tasks logically: Setup -> Implementation -> Verification -> Cleanup.
     - Every task must specify deterministic acceptance criteria and validation checks.

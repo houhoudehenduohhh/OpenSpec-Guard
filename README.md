@@ -72,7 +72,7 @@ Audit reports are never lumped into a single bloated file. They are preserved as
 | Dimension Report | Verification Target | Threat / Flaw Detected |
 | :--- | :--- | :--- |
 | **`audit_functional.md`** | `spec.md` & `tasks.md` | Incomplete feature requirements, untested boundary branches, schema divergence. |
-| **`audit_runtime.md`** | `design.md` & `.venv` rules | Resource leaks, broad `except:`, unhandled exceptions, environment violation. |
+| **`audit_runtime.md`** | `design.md` & `.venv` rules | Resource leaks, broad `except:`, script duplication sprawl (violating Config-Driven principle), environment violation. |
 | **`audit_security.md`** | `proposal.md` (`Out-of-Scope`) | Scope creep, unauthorized modifications, hardcoded secrets, injection vectors. |
 
 ---
