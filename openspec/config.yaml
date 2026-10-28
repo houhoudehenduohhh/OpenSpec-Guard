@@ -11,19 +11,19 @@ context: |
 
 rules:
   proposal:
-    - Clearly define Scope (In-Scope deliverables) and Non-Goals / Out-of-Scope (strict boundary red lines).
-    - Identify technical risks, breaking changes, and external dependency constraints.
+    - "Clearly define Scope (In-Scope deliverables) and Non-Goals / Out-of-Scope (strict boundary red lines)."
+    - "Identify technical risks, breaking changes, and external dependency constraints."
   specs:
-    - Specify observable system behaviors and state transitions.
-    - Strictly define input schemas, output structures, and error branches (Gherkin style: Requirement -> Scenario -> WHEN -> THEN).
+    - "Specify observable system behaviors and state transitions."
+    - "Strictly define input schemas, output structures, and error branches (Gherkin format: Requirement -> Scenario -> WHEN -> THEN)."
   design:
-    - Document technical architecture, component interactions, and data contracts.
-    - Explicitly detail error handling, resource cleanup, and security boundaries.
-    - Enforce the Config-Driven principle: specify generic script interfaces and corresponding config file structures, prohibiting duplicate script sprawl.
+    - "Document technical architecture, component interactions, and data contracts."
+    - "Explicitly detail error handling, resource cleanup, and security boundaries."
+    - "Enforce Config-Driven principle: specify generic script interfaces and corresponding config file structures, prohibiting duplicate script sprawl."
   tasks:
-    - Group tasks logically: Setup -> Implementation -> Verification -> Cleanup.
-    - Every task must specify deterministic acceptance criteria and validation checks.
-    - Ensure temporary test or scratch scripts include explicit removal steps.
+    - "Group tasks logically into: Setup -> Implementation -> Verification -> Cleanup."
+    - "Every task must specify deterministic acceptance criteria and validation checks."
+    - "Ensure temporary test or scratch scripts include explicit removal steps."
 
 operations:
   apply:
